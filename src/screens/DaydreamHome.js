@@ -26,7 +26,8 @@ const DaydreamHome = ({ navigation }) =>{
                     onPress = {() => {navigation.navigate ("Login")}}>
                     <Text style = {styles.textBotones}>Iniciar Sesion</Text>
                 </Button>
-                <Button rounded  style = {styles.boton}>
+                <Button rounded style = {styles.boton}
+                    onPress = {() => {navigation.navigate ("SignIn")}}>
                     <Text style = {styles.textBotones}>Registrarse</Text>
                 </Button>
             </ImageBackground>
