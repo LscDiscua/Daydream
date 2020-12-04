@@ -17,7 +17,15 @@ import {
 // Variables declaradas para poder utilizar dimensiones
 const {width, height } = Dimensions.get("window");
 
-const DaydreamInfoPersonal = ({ navigation }) =>{
+const DaydreamInfoPersonal = ({ route, navigation }) =>{
+
+    const {nombre, correo, contrasena} = route.params;
+
+    const [edad, setEdad ] = useState("");
+
+    const [ peso, setPeso] = useState("");
+
+    const [ altura, setAltura] = useState("");
 
     return (
         <View style = {styles.container}>
@@ -27,22 +35,26 @@ const DaydreamInfoPersonal = ({ navigation }) =>{
                  <Item style = {styles.itemInput}>
                      <Input placeholder = "Edad"
                         placeholderTextColor ="#FFFFFF"
+                        value={edad} onChangeText={setEdad}
                         style ={styles.cajaTexto}/>
                  </Item>
                  <Item style = {styles.itemInput}>
                      <Input placeholder = "Peso"
                         placeholderTextColor ="#FFFFFF"
+                        value={peso} onChangeText={setPeso}
                         style = {styles.cajaTexto}/>
                     <Text style = {styles.cajaTexto}>Kg</Text>
                  </Item>
                  <Item  style = {styles.itemInput}>
                      <Input placeholder = "Altura"
                      placeholderTextColor = "#FFFFFF"
+                     value={altura} onChangeText={setAltura}
                      style = {styles.cajaTexto}/>
                      <Text style ={styles.cajaTexto}>cm</Text>
                  </Item>
                  <Button rounded style = {styles.boton}
-                    onPress = {() => {navigation.navigate ("AvartarsProfile")}}>
+                    onPress = {() => {navigation.navigate ("AvartarsProfile"), 
+                    {nombre, correo, contrasena, edad, peso, altura}}}>
                      <Text style = {styles.textBotones}>Siguiente</Text>
                  </Button>
 

@@ -10,6 +10,8 @@ import{
     Button
 } from "native-base";
 
+import { UsersContext } from "../context/UsersContext";
+
 //variable declaradas para poder utilizar dimensiones
 
 // C:\Users\linda\OneDrive\Documentos\III Periodo 2020\Programacion Movil I\III Parcial Proyecto\App Daydream\Daydream

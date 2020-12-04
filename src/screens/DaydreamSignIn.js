@@ -15,6 +15,31 @@ import {
 const {width, height} = Dimensions.get("window");
 
 const DaydreamSignIn = ({ navigation }) => {
+
+    const [nombre, setNombre] = useState("");
+    const [correo, setCorreo] = useState("");
+    const [contrasena, setContrasena] = useState("");
+    const [contrasenaConfirmada, setContrasenaConfirmada] = useState("");
+
+    const  comparar = () =>{
+
+        if (contrasena === contrasenaConfirmada){
+
+            navigation.navigate("InfoPersonal", {nombre,correo,contrasena})
+            setNombre("");
+            setCorreo("");
+            setContrasena("");
+            setContrasenaConfirmada("");
+            console.log("contrasenaConfirmada");
+        }
+        else {
+            setContrasena("");
+            setContrasenaConfirmada("");
+            console.log ("contrasena incorrecta");
+        }
+
+    }
+
     return(
         <View style = {styles.container}>
             <ImageBackground source = {require ("../../assets/FondoPantallaHome.jpg")}
@@ -23,29 +48,33 @@ const DaydreamSignIn = ({ navigation }) => {
                 <Item style = {styles.itemInput}>
                  <Input placeholder = "Nombre de usuario"
                     placeholderTextColor= "#FFFFFF"
+                    value={nombre} onChangeText={setNombre}
                     style = {styles.cajaTexto} />
                  <Icon name = "user" style = {styles.icono}/>
                 </Item>
                 <Item style = {styles.itemInput}>
                  <Input placeholder = "Correo Electronico"
                     placeholderTextColor= "#FFFFFF"
+                    value={correo} onChangeText={setCorreo}
                     style = {styles.cajaTexto} />
                  <Icon name = "mail" style = {styles.icono}/>
                 </Item>
                 <Item style = {styles.itemInput}>
                  <Input placeholder = "Contraseña" 
                     placeholderTextColor= "#FFFFFF"
+                    value={contrasena} onChangeText={setContrasena}
                     style = {styles.cajaTexto}/> 
                  <Icon name = "lock" style = {styles.icono}/>
                 </Item>
                 <Item style = {styles.itemInput}>
                  <Input placeholder = "Confirmar contraseña" 
                     placeholderTextColor= "#FFFFFF"
+                    value={contrasenaConfirmada} onChangeText={setContrasenaConfirmada}
                     style = {styles.cajaTexto}/> 
                 <Icon name = "lock" style = {styles.icono}/>
                 </Item>
                 <Button rounded style = {styles.boton}
-                    onPress = {() => {navigation.navigate ("InfoPersonal")}}>
+                   onPress = {comparar}>
                      <Text style = {styles.textBotones}>Registrarse</Text>
                 </Button>
             </ImageBackground>

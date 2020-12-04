@@ -1,5 +1,5 @@
 /* Importar los modulos necesarios */
-import React,{useEffect, useState} from "react";
+import React,{useContext, useState} from "react";
 import {Dimensions, View, ImageBackground, StyleSheet, Image} from "react-native";
 
 // Importar modulos necesarios 
@@ -12,6 +12,11 @@ import {
 } from "native-base";
 
 const {width, height} = Dimensions.get("window");
+
+//Importar el Contexto
+
+import { UsersContext} from "../context/UsersContext";
+
 
 
 const imagenQueso = "../../assets/avatares/queso.png";
@@ -28,17 +33,31 @@ const imageGato = "../../assets/avatares/gato.png";
 const imageElefante = "../../assets/avatares/elefante.png";
 
 
-const DaydreamAvatarsProfile = ({ }) =>{
+const DaydreamAvatarsProfile = ({route, navigation}) =>{
+
+    const { nombre, correo, contrasena, edad, peso, altura} = route.params;;
+
+    const usersContext = useContext(UsersContext)
+
+    const { users, addNewUser } = usersContext;
+
+    const insertUser = ( ) =>{
+        addNewUser(nombre,correo,contrasena,edad, peso, altura)
+    }
+
     return (
         <View style = {styles.container}>
             <ImageBackground source = {require ("../../assets/FondoSolido.png")}
                 style ={styles.image}>
                     <Text style = {styles.textDatos}>Seleccione un Avatar</Text>
                     <Item style = {styles.item}>
-                    <Button transparent  style = {styles.botones}>
+                    <Button transparent  style = {styles.botones}
+                    onPress = {() => {navigation.navigate ("ControlUser"),
+                    {nombre, correo, contrasena, edad, peso, altura}}}>
                         <Image source = {require (imagenQueso)}/>
                     </Button>
-                    <Button transparent  style = {styles.botones}>
+                    <Button transparent  style = {styles.botones}
+                    onPress = {insertUser}>
                          <Image source = {require (imageSandwich)}/>
                     </Button>
                     <Button transparent style = {styles.botones}>
