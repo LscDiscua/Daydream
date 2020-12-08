@@ -1,8 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useReducer } from "react";
 import {StyleSheet, View} from "react-native";
 
 import {
-    Button,
     Container,
     Content,
     List,
@@ -13,36 +12,47 @@ import {
 import { UsersContext} from "../context/UsersContext";
 
 
-const DaydreamControlUser = ({route}) => {
+const DaydreamControlUser = () => {
 
-    const { nombre, correo, contrasena, edad, peso, altura} = route.params;
+    // const { users} = useContext(UsersContext);
 
-    const usersContext = useContext(UsersContext)
+    // console.log(users);
+    const { users} = useContext(UsersContext);
 
-    const { users, addNewUser } = usersContext;
+    // useEffect(()=>{
+    //     const { users} = useContext(UsersContext);
 
-    const insertUser = ( ) =>{
-        addNewUser(nombre,correo,contrasena,edad, peso, altura)
-    }
+    //      console.log(users);
+    // })
 
-    // console.log(user);
 
     return (
-        <Container>
+        <Container style = {styles.container}>
             <Content>
-                <View styles = { {flex : 1, flexDirecion : "row"}}>
-                {users.map((user) =>(
-                    <Text key ={user.id}>{user.name}</Text>
-                ))}
-                </View>
-                <Button onPress ={insertUser}>
-                </Button>
+               <List>
+                   <Text>????</Text>
+                 {users ?
+                 users.map((user) => (
+                        <ListItem key={user.id.toString()}>
+                            <Text> {user.nombre}</Text> 
+                        </ListItem>
+                )): null}
+               </List>  
+                 {/* <Button rounded onPress ={insertUser}>
+                </Button> */}
+               
             </Content>
         </Container>
     )
 }
 
-const styles = StyleSheet.create ({});
+const styles = StyleSheet.create ({
 
+    container: {
+        flex: 1,
+        backgroundColor: '#fafafa',
+      }
+
+});
 
 export default DaydreamControlUser;

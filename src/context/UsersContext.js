@@ -11,6 +11,7 @@ export const UsersContextProvier = (props) => {
     // se obtienen desde los props
 
     const { users: initialUsers, children } = props;
+    // console.log(users);
 
     // Almacenar los valores en el estado
 
@@ -23,15 +24,20 @@ export const UsersContextProvier = (props) => {
     }, []);
 
     const refreshUsers = () => {
-        return database.getUsers(setUsers);
+        // return database.getUsers(setUsers);
+        console.log("Aqui estoy");
+    }
+
+    //  const addNewUser = (usuarioNombre,usuarioCorreo,usuarioPeso,usuarioEdad, usuarioaltura) => {
+    const addNewUser = (usuarioNombre) => {
+
+        return database.insertUser(usuarioNombre, refreshUsers);
     };
 
-    const addNewUser = (nombre, correo, contrasena, edad, peso, altura) => {
+    
 
-        return database.insertUser(nombre,correo,contrasena,edad,peso,altura, refreshUsers);
-    };
-
-    const userContext = {
+  
+    const usersContext = {
         users,
         addNewUser,
     };

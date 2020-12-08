@@ -10,7 +10,7 @@ import{
     Button
 } from "native-base";
 
-import { UsersContext } from "../context/UsersContext";
+import { UsersContext} from "../context/UsersContext";
 
 //variable declaradas para poder utilizar dimensiones
 

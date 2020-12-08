@@ -8,13 +8,13 @@ const db = SQLite.openDatabase("daydream.db");
 
 // Obtener los datos del usuario
 
-const getUser = (setUserFunc) =>{
+const getUsers = (setUsersFunc) =>{
   db.transaction((tx) => {
     tx.executeSql(
-        "select * from user",
+        "select * from users",
         [], 
         (_, { rows: { _array }}) => { 
-        setUserFunc(_array);
+        setUsersFunc(_array);
         },
         (t, error) => {
             console.log("Error al momento de mostrar los datos del usuario"); 
@@ -29,11 +29,13 @@ const getUser = (setUserFunc) =>{
 
 // Insertar Usuario
 
-const insertUser = (nombre,correo,peso,edad, altura, successFunc) =>{
+// const insertUser = (usuarioNombre,usuarioCorreo,usuarioPeso,usuarioEdad, usuarioaltura, successFunc) =>{
+  const insertUser = (usuarioNombre, successFunc) =>{
   db.transaction(
     (tx) => {
-        tx.executeSql("insert into user (nombre,correo,contrasena, peso, edad, altura) value (?,?,?,?,?,?)",
-        [nombre,correo,contrasena,peso,edad,altura]);
+        tx.executeSql("insert into users (nombre) value (?)", [
+          usuarioNombre
+        ]);
     },
     (t, error) => {
         console.log("Error al insertar el usuario");
@@ -52,7 +54,7 @@ const dropDatabaseTableAsync = async () => {
   return new Promise ((resolve, reject) =>{
     db.transaction (
       (tx) => {
-        tx.executeSql("drop table user");
+        tx.executeSql("drop table users ");
       },
       (_t, error) => {
         console.log("Error al eliminar la tabla de usuarios");
@@ -72,7 +74,7 @@ const setupDatabaseTableAsync = async () => {
     db.transaction(
       (tx) =>{
         tx.executeSql(
-          "create table if not exists user (id integer primary key autoincrement, nombre text not null, correo text not null, contrasena text not null, peso integer not null, edad integer not null, altura integer not null)"
+          "create table if not exists users (id integer primary key autoincrement, nombre text , correo text, contrasena text , peso integer , edad integer , altura integer)"
         );
       },
       (_t, error) => {
@@ -95,7 +97,7 @@ const setupUserAsync = async () => {
   return new Promise ((resolve, reject) => {
     db.transaction(
       (tx) => {
-        tx.executeSql("insert into user (nombre,correo,contrasena, peso, edad, altura) values (?,?,?,?,?,?)",
+        tx.executeSql("insert into users (nombre,correo,contrasena, peso, edad, altura) values (?,?,?,?,?,?)",
         [
           "Kim",
           "kim1995@gmail.com",
@@ -111,6 +113,115 @@ const setupUserAsync = async () => {
         reject(error);
       },
       (_t, success) => {
+        console.log("Se insertaron Correctamente");
+        resolve(success);
+      }
+    );
+  });
+};
+
+//-----------------------------------------Tabla de Alimentos--------------------------------------------
+
+const getFoods = (setFoodsFunc) =>{
+  db.transaction((tx) => {
+    tx.executeSql(
+        "select * from food",
+        [], 
+        (_, { rows: { _array }}) => { 
+        setUserFunc(_array);
+        },
+        (t, error) => {
+            console.log("Error al momento de mostrar los datos de la tabla"); 
+            console.log(error);
+        },
+        (_t, _success) => {
+            console.log("Datos de aliementos obtenidos Correctamente");
+        }
+    );
+  });
+};
+
+// Insertar Usuario
+
+const nombresComidas = [
+  "Arroz",
+  "Pan",
+  "Postres",
+  "Verduras",
+  "Frutas"
+
+];
+
+const insertFood = (nombresComidas, successFunc) =>{
+  db.transaction(
+    (tx) => {
+        tx.executeSql("insert into food (nombre) value (?)",[nombresComidas]);
+    },
+    (t, error) => {
+        console.log("Error al insertar los alimentos");
+        console.log(error);
+    },
+    (_t, _success) => { 
+        successFunc;
+    }
+  );
+};
+
+
+// Borrar la base de datos
+
+const dropDatabaseFoodTableAsync = async () => {
+  return new Promise ((resolve, reject) =>{
+    db.transaction (
+      (tx) => {
+        tx.executeSql("drop table food");
+      },
+      (_t, error) => {
+        console.log("Error al eliminar la tabla Foods");
+        reject(error);
+      },
+      (_t, result) =>{
+        console.log("Tabla Eliminada");
+        resolve(result);
+      }
+    );
+  });
+};
+
+//Creacion de la tabla de Food
+const setupDatabaseFoodTableAsync = async () => {
+  return new Promise((resolve, reject) => {
+    db.transaction(
+      (tx) =>{
+        tx.executeSql(
+          "create table if not exists food (id integer primary key autoincrement, nombre text not null)"
+        );
+      },
+      (_t, error) => {
+        console.log ("Error al momento de crear la table Food");
+        console.log(error);
+        reject(error);
+      },
+      (_t, success) =>{
+        console.log("tabla food Creada ");
+        resolve(success);
+      }
+    );
+  });
+};
+
+const setupFoodAsync = async () => {
+  return new Promise ((resolve, reject) => {
+    db.transaction(
+      (tx) => {
+        tx.executeSql("insert into food (nombre) values (?)",[comidas]);
+      },
+      (_t, error) => {
+        console.log("Error al momento de insertar los valores por defecto");
+        console.log(error);
+        reject(error);
+      },
+      (_t, success) => {
         console.log("Se insertaron?");
         resolve(success);
       }
@@ -118,34 +229,21 @@ const setupUserAsync = async () => {
   });
 };
 
-// Alimentos
-
-// const foodLists = [
-//   celereales,
-//   frutas,
-//   verduras,
-//   carnes,
-//   carnesRojas
-// ];
-
-
-// const setupFoodsTableAsync = async () =>{
-
-//   return new Promise((resolve, reject) =>{
-//     db.transaction((tx) =>{
-//       tx.executeSql("insert into food (id, food) values (?, ?)", foodLists)
-//     })
-//   }) 
-// }
-
-
 
 export const database = {
-  getUser,
+
+  // Usuarioss
+  getUsers,
   insertUser,
   dropDatabaseTableAsync,
   setupDatabaseTableAsync,
   setupUserAsync,
+
+  getFoods,
+  insertFood,
+  dropDatabaseFoodTableAsync,
+  setupDatabaseFoodTableAsync,
+  setupFoodAsync
 };
  
 

@@ -33,7 +33,8 @@ import {
                     style = {styles.cajaTexto}/> 
                     <Icon name = "lock" style = {styles.icono}/>
                  </Item>
-                 <Button rounded style = {styles.boton}>
+                 <Button rounded style = {styles.boton}
+                 onPress = {() => { navigation.navigate("OptionsHome")}}>
                      <Text style = {styles.textBotones}>Iniciar Sesion</Text>
                  </Button>
              </ImageBackground>

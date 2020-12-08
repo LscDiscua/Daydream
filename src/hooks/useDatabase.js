@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+
 import { database } from "../components/db";
 
 const useDatabase = () => {
+
     const [isLoadingComplete, setIsLoadingComplete] = useState(false);
 
     const loadDatabase = async () => {
@@ -13,6 +15,9 @@ const useDatabase = () => {
             // await database.dropDatabaseTableAsync();
             // await database.setupDatabaseTableAsync();
             // await database.setupUserAsync();
+            // await database.dropDatabaseFoodTableAsync();
+            // await database.setupDatabaseFoodTableAsync();
+            await database.setupUserAsync();
             // finaliza la carga de la DB
             setIsLoadingComplete(true);
         } catch(error) {

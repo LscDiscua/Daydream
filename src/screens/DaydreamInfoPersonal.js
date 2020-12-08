@@ -27,6 +27,25 @@ const DaydreamInfoPersonal = ({ route, navigation }) =>{
 
     const [ altura, setAltura] = useState("");
 
+
+    const  camposVacios = () =>{
+
+        if (!peso){
+
+            setEdad("");
+            setPeso("");
+            setAltura("");
+            console.log ("contrasena incorrecta");
+        }
+
+        else {
+            navigation.navigate("AvartarsProfile", {nombre,correo,contrasena, edad,peso,altura})
+            setEdad("");
+            setPeso("");
+            setAltura("");
+        }        
+    }
+
     return (
         <View style = {styles.container}>
             <ImageBackground source = {require ("../../assets/FondoPantallaHome.jpg")}
@@ -53,8 +72,8 @@ const DaydreamInfoPersonal = ({ route, navigation }) =>{
                      <Text style ={styles.cajaTexto}>cm</Text>
                  </Item>
                  <Button rounded style = {styles.boton}
-                    onPress = {() => {navigation.navigate ("AvartarsProfile"), 
-                    {nombre, correo, contrasena, edad, peso, altura}}}>
+                    // onPress = {() => {navigation.navigate ("AvartarsProfile"), {nombre, correo, contrasena, edad, peso, altura}}}
+                    onPress ={camposVacios}>
                      <Text style = {styles.textBotones}>Siguiente</Text>
                  </Button>
 
