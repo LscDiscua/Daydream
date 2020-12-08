@@ -4,6 +4,8 @@ import * as SplashScreen from "expo-splash-screen";
 import useDatabase from "./src/hooks/useDatabase";
 import { UsersContextProvier } from "./src/context/UsersContext";
 
+import {FoodsContextProvider } from "./src/context/context";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -14,6 +16,7 @@ import DaydreamSignIn from "./src/screens/DaydreamSignIn";
 import DaydreamInfoPersonal from "./src/screens/DaydreamInfoPersonal";
 import DaydreamAvatarsProfile from "./src/screens/DaydreamAvatarsProfile";
 import DaydreamControlUser from "./src/screens/DaydreamControlUser";
+import DaydreamOptionsHome from "./src/screens/DaydreamOptionsHome"; 
 
 import { Dimensions } from 'react-native';
 
@@ -43,7 +46,7 @@ export default function App() {
           <Stack.Screen name = "InfoPersonal" component = {DaydreamInfoPersonal} options = {{ title: ""}}/>
           <Stack.Screen name = "AvartarsProfile" component = {DaydreamAvatarsProfile} options = {{ title: ""}}/>
           <Stack.Screen name = "ControlUser" component = {DaydreamControlUser} options = {{ title: ""}}/>
-
+          <Stack.Screen name = "OptionsHome" component = {DaydreamOptionsHome} options = {{ title: ""}}/>
         </Stack.Navigator>
       </NavigationContainer>
   );

@@ -15,3 +15,7 @@ web-build/
 # Ignorar Variable de entorno 
 
 enviroment.js
+
+# Variable desconocida
+
+debug.log
