@@ -1,5 +1,5 @@
 /* Importar los modulos necesarios para la pantalla */
-import React, {useEffect, useState } from "react";
+import React, {useEffect, useState, useContext} from "react";
 import { View, StyleSheet, ImageBackground, Dimensions} from "react-native";
 
 // Importar componentes de native-base
@@ -12,10 +12,53 @@ import {
     Text
 } from "native-base";
 
+import { UsersContext } from "../context/UsersContext";
+
+
+
+
 //variable declaradas para poder utilizar dimensiones
  const { width, height } = Dimensions.get("window");
 
  const DaydreamLogin = ({ navigation }) =>{
+
+    const [ correElectronico, setCorreoElectronico] = useState("");
+    const [ contrasenaUsuario, setContrasenaUsuario] = useState("");
+
+
+    const {users,usuarioCorreo,usuarioContrasena} = useContext(UsersContext);
+    console.log(users);
+
+    // const { users,refreshUsers } = usersContext;
+
+    const comprobarUsuario = ()=>{
+
+        console.log("Holis Si entro!");
+
+        if (correElectronico){
+
+            // console.log("Holis Si entro2!");
+
+            for(let i= 0; i < users.length; i ++ ){
+
+                console.log("Holis Si entro2!");
+                if (correElectronico === users[i].correo.toString() && contrasenaUsuario === users[i].contrasena.toString()){
+                    navigation.navigate("OptionsHome")
+                    console.log("Bienvenido");
+                }
+                else{
+                    setCorreoElectronico("");
+                    setContrasenaUsuario("");
+                    console.log("No se puede ingresar")
+                }
+            }
+
+        }
+        else {
+            console.log("debes ingresar algo");
+        }
+
+    }
      return(
          <View style = {styles.container}>
              <ImageBackground source = {require ("../../assets/FondoPantallaHome.jpg")}
@@ -24,17 +67,23 @@ import {
                  <Item style = {styles.itemInput}>
                  <Input placeholder = "Correo Electronico"
                     placeholderTextColor= "#FFFFFF"
-                    style = {styles.cajaTexto} />
+                    style = {styles.cajaTexto} 
+                    value={correElectronico} onChangeText={setCorreoElectronico}/>
                 <Icon name = "mail" style = {styles.icono}/>
                  </Item>
                  <Item style = {styles.itemInput}>
                  <Input placeholder = "Contraseña" 
                     placeholderTextColor= "#FFFFFF"
-                    style = {styles.cajaTexto}/> 
+                    style = {styles.cajaTexto} 
+                    value={contrasenaUsuario} onChangeText={setContrasenaUsuario}/> 
                     <Icon name = "lock" style = {styles.icono}/>
                  </Item>
-                 <Button rounded style = {styles.boton}
+                 {/* <Button rounded style = {styles.boton}
                  onPress = {() => { navigation.navigate("OptionsHome")}}>
+                     <Text style = {styles.textBotones}>Iniciar Sesion</Text>
+                 </Button> */}
+                 <Button rounded style = {styles.boton}
+                 onPress = {comprobarUsuario}>
                      <Text style = {styles.textBotones}>Iniciar Sesion</Text>
                  </Button>
              </ImageBackground>

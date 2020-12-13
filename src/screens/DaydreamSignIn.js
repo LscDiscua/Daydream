@@ -50,7 +50,7 @@ const DaydreamSignIn = ({ navigation }) => {
                     placeholderTextColor= "#FFFFFF"
                     value={nombre} onChangeText={setNombre}
                     style = {styles.cajaTexto} />
-                 <Icon name = "user" style = {styles.icono}/>
+                 <Icon name = "people" style = {styles.icono}/>
                 </Item>
                 <Item style = {styles.itemInput}>
                  <Input placeholder = "Correo Electronico"

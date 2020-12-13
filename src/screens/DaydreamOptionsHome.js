@@ -11,7 +11,7 @@ import {
     ListItem
 } from "native-base";
 
-import { FoodsContext } from "../context/context";
+import { FoodsContext } from "../context/FoodsContext";
 
 const {width, height } = Dimensions.get("window");
 
@@ -48,10 +48,9 @@ const DaydreamOptionsHome = () =>{
                         style = {styles.imagenes}/>
                     </Button>
                     </Item>
-                    </View>
-                    <View>
+                    <View style = {{backgroundColor: "#ffffff"}}>
                         <List>
-                        { foods 
+                        {foods 
                             ? foods.map((food) =>(
                                 <ListItem key = {food.id.toString()}>
                                     <Text>{food.nombre}</Text>
@@ -59,9 +58,8 @@ const DaydreamOptionsHome = () =>{
                                 </ListItem>
                             )): null}
                         </List>
-
                     </View>
-                    
+                    </View>
                 {/* </View> */}
             </ImageBackground>
         </View>
