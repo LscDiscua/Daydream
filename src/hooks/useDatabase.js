@@ -12,12 +12,16 @@ const useDatabase = () => {
             // Await database.droaDatabaseTableAsync();
             //await database.setupDatabaseTableAsync();
 
+            //--- Usuario Componentes----
             // await database.dropDatabaseTableAsync();
-            // await database.setupDatabaseTableAsync();
-            // await database.setupUserAsync();
+            await database.setupDatabaseTableAsync();
+            await database.setupUserAsync();
+
+            //----- Comidad------
             // await database.dropDatabaseFoodTableAsync();
             // await database.setupDatabaseFoodTableAsync();
-            await database.setupUserAsync();
+            // await database.setupFoodAsync();
+            
             // finaliza la carga de la DB
             setIsLoadingComplete(true);
         } catch(error) {

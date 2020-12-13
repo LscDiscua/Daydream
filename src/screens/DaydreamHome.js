@@ -7,8 +7,12 @@ import { View, Dimensions, ImageBackground, StyleSheet} from "react-native";
 import{
     Container,
     Text,
-    Button
+    Button,
+    Content,
+    Spinner
 } from "native-base";
+
+import * as Font from "expo-font";
 
 import { UsersContext} from "../context/UsersContext";
 
@@ -19,6 +23,29 @@ import { UsersContext} from "../context/UsersContext";
 const { width, height } = Dimensions.get("window");
 
 const DaydreamHome = ({ navigation }) =>{
+
+
+    const [fontsLoaded, setFontsLoaded] = useState(false);
+
+    useEffect(() => {
+        const loadFontsAsync = async () => {
+          await Font.loadAsync({
+            Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+          }).then(() => {
+            setFontsLoaded(true);
+          });
+        };
+    
+        loadFontsAsync();
+      }, []);
+
+      if (!fontsLoaded)
+      return (
+        <Content contentContainerStyle={styles.content}>
+          <Spinner color="blue" />
+        </Content>
+      );
+
     return(
         <View style ={styles.container}>
             <ImageBackground source ={require ("../../assets/FondoPantallaHome.jpg")}
@@ -38,6 +65,11 @@ const DaydreamHome = ({ navigation }) =>{
 }
 
 const styles = StyleSheet.create({
+
+    content: {
+        flex: 1,
+        justifyContent: "center",
+      },
 
     container :{
         flex: 1,
@@ -59,6 +91,7 @@ const styles = StyleSheet.create({
     },
 
     boton: {
+        fontFamily: "Roboto",
         width:width * 0.7,
         height: height * 0.1,
         backgroundColor: "#4d3978",

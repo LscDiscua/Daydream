@@ -39,19 +39,28 @@ const DaydreamAvatarsProfile = ({ route, navigation}) =>{
 
     const usersContext = useContext(UsersContext)
 
-    const { users, addNewUser } = usersContext;
+    const { users, addNewUser, refreshUsers } = usersContext;
 
-    const insertUser = ( ) =>{
+    // const insertarUsuario = async ( ) =>{
+
+    //     await addNewUser(nombre,correo,contrasena,edad, peso, altura, refreshUsers);
+    //     console.log("Se inserto Correctamente");
+    // }
+
+    const insertarUsuario = () =>{
+
         addNewUser(nombre,correo,contrasena,edad, peso, altura);
         console.log("Se inserto Correctamente");
     }
+
 
     const  presionarBoton = () =>{
         // navigation.navigate("ControlUser", {nombre,correo,contrasena, edad,peso,altura});
 
         // navigation.navigate("ControlUser");
-        navigation.navigate("OptionsHome");
-        // insertUser();  
+        insertarUsuario();  
+        navigation.navigate("ControlUser");
+       
     }
 
     return (

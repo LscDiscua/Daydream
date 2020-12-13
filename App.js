@@ -1,10 +1,11 @@
 import React from 'react';
 
+
 import * as SplashScreen from "expo-splash-screen";
 import useDatabase from "./src/hooks/useDatabase";
 import { UsersContextProvier } from "./src/context/UsersContext";
 
-import {FoodsContextProvider } from "./src/context/context";
+import { FoodsContextProvider } from "./src/context/FoodsContext";
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -21,13 +22,13 @@ import DaydreamOptionsHome from "./src/screens/DaydreamOptionsHome";
 import { Dimensions } from 'react-native';
 
 
-
 const { width, height } = Dimensions.get("window");
 
 const Stack = createStackNavigator();
 
 export default function App() {
 
+ 
   SplashScreen.preventAutoHideAsync();
 
   const isLoadingComplete = useDatabase();
@@ -35,6 +36,8 @@ export default function App() {
   if (isLoadingComplete) SplashScreen.hideAsync();
   
   return (
+    <FoodsContextProvider>
+    <UsersContextProvier>
       <NavigationContainer>
         <Stack.Navigator initialRouteName = "Home" screenOptions={{
                 headerShown: true,
@@ -49,6 +52,8 @@ export default function App() {
           <Stack.Screen name = "OptionsHome" component = {DaydreamOptionsHome} options = {{ title: ""}}/>
         </Stack.Navigator>
       </NavigationContainer>
+      </UsersContextProvier>
+    </FoodsContextProvider>
   );
 }
 

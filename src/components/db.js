@@ -29,12 +29,17 @@ const getUsers = (setUsersFunc) =>{
 
 // Insertar Usuario
 
-// const insertUser = (usuarioNombre,usuarioCorreo,usuarioPeso,usuarioEdad, usuarioaltura, successFunc) =>{
-  const insertUser = (usuarioNombre, successFunc) =>{
+const insertUser = async (usuarioNombre,usuarioCorreo,usuarioContrasena, usuarioPeso,usuarioEdad, usuarioAltura, successFunc) =>{
+  // const insertUser = (usuarioNombre, successFunc) =>{
   db.transaction(
     (tx) => {
-        tx.executeSql("insert into users (nombre) value (?)", [
-          usuarioNombre
+        tx.executeSql("insert into users (nombre, correo, contrasena, peso, edad, altura) values (?,?,?,?,?,?)", [
+          usuarioNombre,
+          usuarioCorreo,
+          usuarioContrasena,
+          usuarioPeso,
+          usuarioEdad,
+          usuarioAltura
         ]);
     },
     (t, error) => {
@@ -46,6 +51,7 @@ const getUsers = (setUsersFunc) =>{
     }
   );
 };
+
 
 
 // Borrar la base de datos
@@ -99,8 +105,8 @@ const setupUserAsync = async () => {
       (tx) => {
         tx.executeSql("insert into users (nombre,correo,contrasena, peso, edad, altura) values (?,?,?,?,?,?)",
         [
-          "Kim",
-          "kim1995@gmail.com",
+          "Linda",
+          "LindaSarahi@gmail.com",
           "holis",
           8,
           25,
@@ -128,7 +134,7 @@ const getFoods = (setFoodsFunc) =>{
         "select * from food",
         [], 
         (_, { rows: { _array }}) => { 
-        setUserFunc(_array);
+        setFoodsFunc(_array);
         },
         (t, error) => {
             console.log("Error al momento de mostrar los datos de la tabla"); 
@@ -141,7 +147,7 @@ const getFoods = (setFoodsFunc) =>{
   });
 };
 
-// Insertar Usuario
+// Insertar Comidas
 
 const nombresComidas = [
   "Arroz",
@@ -151,6 +157,17 @@ const nombresComidas = [
   "Frutas"
 
 ];
+
+const imagenQueso = "../../assets/avatares/queso.png";
+
+// const comidas =() => {
+//   nombresComidas.map((value) => {
+//     (value);
+//   });
+// }
+
+
+
 
 const insertFood = (nombresComidas, successFunc) =>{
   db.transaction(
@@ -214,7 +231,9 @@ const setupFoodAsync = async () => {
   return new Promise ((resolve, reject) => {
     db.transaction(
       (tx) => {
-        tx.executeSql("insert into food (nombre) values (?)",[comidas]);
+        nombresComidas.forEach((comida)=>{
+          tx.executeSql("insert into food (nombre) values (?)",[comida]); 
+        }) 
       },
       (_t, error) => {
         console.log("Error al momento de insertar los valores por defecto");
@@ -222,7 +241,7 @@ const setupFoodAsync = async () => {
         reject(error);
       },
       (_t, success) => {
-        console.log("Se insertaron?");
+        console.log("Se insertaron Correctamente las Comidas ");
         resolve(success);
       }
     );

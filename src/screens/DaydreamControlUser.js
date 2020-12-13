@@ -18,29 +18,28 @@ const DaydreamControlUser = () => {
 
     // console.log(users);
     const { users} = useContext(UsersContext);
+    console.log(users);
 
     // useEffect(()=>{
     //     const { users} = useContext(UsersContext);
 
-    //      console.log(users);
+    //      
     // })
 
 
     return (
         <Container style = {styles.container}>
             <Content>
-               <List>
-                   <Text>????</Text>
+               <List style = {{marginTop: 100}}>
+                   <Text style= {styles.textoInicial}>Usuario</Text>
                  {users ?
                  users.map((user) => (
                         <ListItem key={user.id.toString()}>
                             <Text> {user.nombre}</Text> 
+                            <Text> {user.correo}</Text> 
                         </ListItem>
                 )): null}
-               </List>  
-                 {/* <Button rounded onPress ={insertUser}>
-                </Button> */}
-               
+               </List>   
             </Content>
         </Container>
     )
@@ -51,6 +50,11 @@ const styles = StyleSheet.create ({
     container: {
         flex: 1,
         backgroundColor: '#fafafa',
+        justifyContent: "center"
+      },
+
+      textoInicial: {
+         textAlign: "center"
       }
 
 });

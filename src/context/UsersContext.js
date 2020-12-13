@@ -24,19 +24,17 @@ export const UsersContextProvier = (props) => {
     }, []);
 
     const refreshUsers = () => {
-        // return database.getUsers(setUsers);
+        return database.getUsers(setUsers);
         console.log("Aqui estoy");
     }
 
-    //  const addNewUser = (usuarioNombre,usuarioCorreo,usuarioPeso,usuarioEdad, usuarioaltura) => {
-    const addNewUser = (usuarioNombre) => {
+     const addNewUser = (usuarioNombre,usuarioCorreo,usuarioContrasena, usuarioPeso,usuarioEdad, usuarioAltura) => {
 
-        return database.insertUser(usuarioNombre, refreshUsers);
+        return database.insertUser(usuarioNombre,usuarioCorreo, usuarioContrasena, usuarioPeso,usuarioEdad, usuarioAltura, refreshUsers);
+
+        console.log("Estoy Aqui")
     };
 
-    
-
-  
     const usersContext = {
         users,
         addNewUser,
