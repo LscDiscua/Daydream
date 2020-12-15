@@ -21,8 +21,8 @@ export const FoodsContextProvider = ( props ) => {
         return database.getFoods(setFoods);
     };
 
-    const addNewFood = (nombreComidas) => {
-        return database.insertFood(nombreComidas,refreshFoods);
+    const addNewFood = (comida) => {
+        return database.insertFood(comida,refreshFoods);
     };
 
     const foodsContext = {
