@@ -13,11 +13,11 @@ import {
 
 const {width, height} = Dimensions.get("window");
 
-//Importar el Contexto
+//Importar el Contexto usuarios
 
 import { UsersContext} from "../context/UsersContext";
 
-
+// Asignacion de variables para las imagenes de avatars
 
 const imagenQueso = "../../assets/avatares/queso.png";
 const imagenPajarito = "../../assets/avatares/pajarito.png";
@@ -32,8 +32,12 @@ const imageSandwich = "../../assets/avatares/sandwich.png";
 const imageGato = "../../assets/avatares/gato.png";
 const imageElefante = "../../assets/avatares/elefante.png";
 
+// Funcion Principal de la pantalla
+
 
 const DaydreamAvatarsProfile = ({ route, navigation}) =>{
+
+    // Variables provenietes del contexto para realizar la insercion en la tabla usuarios
 
     const {nombre, correo, contrasena,edad, peso, altura} = route.params;
 
@@ -47,21 +51,23 @@ const DaydreamAvatarsProfile = ({ route, navigation}) =>{
     //     console.log("Se inserto Correctamente");
     // }
 
+    // Funcion para insertar los datos del usuario
+
     const insertarUsuario = () =>{
 
-        addNewUser(nombre,correo,contrasena,edad, peso, altura);
+        addNewUser(nombre,correo,contrasena,edad, peso, altura, refreshUsers);
         console.log("Se inserto Correctamente");
     }
 
+    // Funcion para navegar en la siguiente pantalla
 
     const  presionarBoton = () =>{
-        // navigation.navigate("ControlUser", {nombre,correo,contrasena, edad,peso,altura});
-
-        // navigation.navigate("ControlUser");
         insertarUsuario();  
-        navigation.navigate("ControlUser");
-       
+        // navigation.navigate("OptionsHome", {id: users.id});
+        navigation.navigate("Users", {id: users.id});
     }
+
+    // Return de la pantalla
 
     return (
         <View style = {styles.container}>
@@ -132,6 +138,8 @@ const DaydreamAvatarsProfile = ({ route, navigation}) =>{
 
 }
 
+// Estilos de cada uno de los componetes de la pantalla
+
 const styles = StyleSheet.create({
 
     container : {
@@ -167,5 +175,7 @@ const styles = StyleSheet.create({
     }
 
 });
+
+// Importar la funcion de la pantalla
 
 export default DaydreamAvatarsProfile;

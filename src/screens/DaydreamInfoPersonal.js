@@ -19,6 +19,8 @@ const {width, height } = Dimensions.get("window");
 
 const DaydreamInfoPersonal = ({ route, navigation }) =>{
 
+
+     // Variables necesarias para el funcionamiento de la pantalla
     const {nombre, correo, contrasena} = route.params;
 
     const [edad, setEdad ] = useState("");
@@ -27,7 +29,7 @@ const DaydreamInfoPersonal = ({ route, navigation }) =>{
 
     const [ altura, setAltura] = useState("");
 
-
+    // Funcion que verifica la campos vacios
     const  camposVacios = () =>{
 
         if (!peso){
@@ -35,7 +37,7 @@ const DaydreamInfoPersonal = ({ route, navigation }) =>{
             setEdad("");
             setPeso("");
             setAltura("");
-            console.log ("contrasena incorrecta");
+            // console.log ("contrasena incorrecta");
         }
 
         else {
@@ -45,6 +47,8 @@ const DaydreamInfoPersonal = ({ route, navigation }) =>{
             setAltura("");
         }        
     }
+
+// Return de la pantalla
 
     return (
         <View style = {styles.container}>
@@ -81,6 +85,9 @@ const DaydreamInfoPersonal = ({ route, navigation }) =>{
         </View>
     );
 }
+
+
+// Estilo de los componentes
 
 const styles = StyleSheet.create({
 
@@ -134,5 +141,7 @@ const styles = StyleSheet.create({
         color: "#FFFFFF"
     }
 });
+
+// Exportacion de la funcion principal
 
 export default DaydreamInfoPersonal;

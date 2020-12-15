@@ -24,7 +24,7 @@ const { width, height } = Dimensions.get("window");
 
 const DaydreamHome = ({ navigation }) =>{
 
-
+  // funcion para arreglar error de Roboto_Medium
     const [fontsLoaded, setFontsLoaded] = useState(false);
 
     useEffect(() => {
@@ -64,6 +64,7 @@ const DaydreamHome = ({ navigation }) =>{
     );
 }
 
+// Estilo de los componetes
 const styles = StyleSheet.create({
 
     content: {
@@ -111,6 +112,8 @@ const styles = StyleSheet.create({
 
 
 });
+
+// Exportacion de la funcion principal
 
 export default DaydreamHome;
 
