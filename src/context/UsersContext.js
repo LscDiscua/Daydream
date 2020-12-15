@@ -17,6 +17,20 @@ export const UsersContextProvier = (props) => {
 
     const [ users, setUsers ] = useState (initialUsers);
 
+    const [ user, setUser ] = useState ("");
+
+
+    const [ nombre , setNombre] = useState("");
+
+    const [ correo , setCorreo] = useState("");
+
+    const [ edad , setEdad] = useState("");
+
+    const [ peso , setPeso] = useState("");
+
+    const [ altura , setAltura] = useState("");
+
+
     // Cargar u obtener las notas 
 
     useEffect (() =>{
@@ -25,19 +39,29 @@ export const UsersContextProvier = (props) => {
 
     const refreshUsers = () => {
         return database.getUsers(setUsers);
-        console.log("Aqui estoy");
     }
 
-     const addNewUser = (usuarioNombre,usuarioCorreo,usuarioContrasena, usuarioPeso,usuarioEdad, usuarioAltura) => {
+    // const addNewUser = (usuarioNombre,usuarioCorreo,usuarioContrasena, usuarioPeso,usuarioEdad, usuarioAltura) => {
 
-        return database.insertUser(usuarioNombre,usuarioCorreo, usuarioContrasena, usuarioPeso,usuarioEdad, usuarioAltura, refreshUsers);
+    //     return database.insertUser(usuarioNombre,usuarioCorreo, usuarioContrasena, usuarioPeso,usuarioEdad, usuarioAltura, refreshUsers);
+    // };
 
-        console.log("Estoy Aqui")
+    const addNewUser = async (usuarioNombre,usuarioCorreo,usuarioContrasena, usuarioPeso,usuarioEdad, usuarioAltura) => {
+
+        await database.insertUser(usuarioNombre,usuarioCorreo, usuarioContrasena, usuarioPeso,usuarioEdad, usuarioAltura, refreshUsers);
+        return refreshUsers();
     };
+
+    const getUsuarioById = (id) =>{
+
+        return database.getUsuarioById(id,setUser);
+    }
 
     const usersContext = {
         users,
         addNewUser,
+        user,
+        getUsuarioById,
     };
 
     // Pasar los valores al proveedor y retonarlo
