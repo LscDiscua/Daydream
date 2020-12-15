@@ -16,10 +16,14 @@ const {width, height} = Dimensions.get("window");
 
 const DaydreamSignIn = ({ navigation }) => {
 
+    // Variables que almacenaran los valores del usuario
+
     const [nombre, setNombre] = useState("");
     const [correo, setCorreo] = useState("");
     const [contrasena, setContrasena] = useState("");
     const [contrasenaConfirmada, setContrasenaConfirmada] = useState("");
+
+    // Variable para confirmar contrasena ingresada
 
     const  comparar = () =>{
 
@@ -39,6 +43,8 @@ const DaydreamSignIn = ({ navigation }) => {
         }
 
     }
+
+    // Return de la funcion
 
     return(
         <View style = {styles.container}>
@@ -82,6 +88,8 @@ const DaydreamSignIn = ({ navigation }) => {
     );
 }
 
+
+// Estilos  de los componentes
 const styles = StyleSheet.create({
 
     container:{
@@ -136,5 +144,8 @@ const styles = StyleSheet.create({
         color: "#FFFFFF"
     }
 });
+
+
+// exportar variable principal
 
 export default DaydreamSignIn;

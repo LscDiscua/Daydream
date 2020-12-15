@@ -27,29 +27,25 @@ import { UsersContext } from "../context/UsersContext";
 
 
     const {users,usuarioCorreo,usuarioContrasena} = useContext(UsersContext);
-    console.log(users);
+    // console.log(users);
 
     // const { users,refreshUsers } = usersContext;
 
-    const comprobarUsuario = ()=>{
+    // Funcion que comprueba si el usuarios ingresado en los input existe
 
-        console.log("Holis Si entro!");
+    const comprobarUsuario = ()=>{
 
         if (correElectronico){
 
-            // console.log("Holis Si entro2!");
+            
 
             for(let i= 0; i < users.length; i ++ ){
-
-                console.log("Holis Si entro2!");
                 if (correElectronico === users[i].correo.toString() && contrasenaUsuario === users[i].contrasena.toString()){
-                    navigation.navigate("OptionsHome")
-                    console.log("Bienvenido");
+                    navigation.navigate("OptionsHome", {correElectronico, id: users[i].id});
                 }
                 else{
                     setCorreoElectronico("");
                     setContrasenaUsuario("");
-                    console.log("No se puede ingresar")
                 }
             }
 
@@ -59,11 +55,13 @@ import { UsersContext } from "../context/UsersContext";
         }
 
     }
+
+    // Return de la pantalla
      return(
          <View style = {styles.container}>
              <ImageBackground source = {require ("../../assets/FondoPantallaHome.jpg")}
                     style = {styles.image}>
-                 <Text style = {styles.textInicio}>Iniciar Sesion</Text>
+                 <Text style = {styles.textInicio}>Iniciar Sesión</Text>
                  <Item style = {styles.itemInput}>
                  <Input placeholder = "Correo Electronico"
                     placeholderTextColor= "#FFFFFF"
@@ -90,6 +88,8 @@ import { UsersContext } from "../context/UsersContext";
          </View>
      );
  }
+
+// Estilo de los componentes
 
  const styles = StyleSheet.create({
 
@@ -145,6 +145,8 @@ import { UsersContext } from "../context/UsersContext";
     }
 
  });
+
+ // Exportacion de la funcion principal
 
  export default DaydreamLogin;
 
